@@ -9,6 +9,18 @@
 # This Script has been written by Jeremy Blum (www.jeremyblum.com).  Licensed via GPL v3.
 
 ######
+# CONFIGURATION OPTIONS
+######
+gyb_abs_directory       = 'C:\\gyb\\jeremy@jeremyblum.com\\'
+start_year              = 2006
+end_year                = 2011
+contact_search_term     = 'Subject: JeremyBlum.com Contact'
+comment_search_term     = 'Subject: [JeremyBlum.com] Comment'
+spam_term               = 'Akismet: Spam'
+output_file             = 'emails.csv'
+validate_addresses      = False
+
+######
 # IMPORT LIBRARIES
 ######
 import datetime
@@ -17,18 +29,8 @@ import os
 import re
 import string
 import csv
-from validate_email import validate_email
-
-######
-# CONFIGURATION OPTIONS
-######
-gyb_abs_directory       = 'C:\\gyb\\jeremy@jeremyblum.com\\'
-start_year              = 2006
-end_year                = 2013
-contact_search_term     = 'Subject: JeremyBlum.com Contact'
-comment_search_term     = 'Subject: [JeremyBlum.com] Comment'
-spam_term               = 'Akismet: Spam'
-output_file             = 'emails.csv'
+if validate_addresses:
+   from validate_email import validate_email
 
 ######
 # ITERATE AND FIND EMAILS!
@@ -86,10 +88,13 @@ print '\nChecking Email Addresses and Writing to CSV File...'
 for row in output:
    if row[1] not in duplicates_removed:
       if row[1] != '':
-         try:
-            good = validate_email(row[1],verify=True)
-         except:
-            good = True #if SMTP server is having problems, just assume it's good.
+         if validate_addresses:
+            try:
+               good = validate_email(row[1],verify=True)
+            except:
+               good = True #if SMTP server is having problems, just assume it's good.
+         else:
+            good = True
          if good:
             writer.writerow(row)
             duplicates_removed.add(row[1])
