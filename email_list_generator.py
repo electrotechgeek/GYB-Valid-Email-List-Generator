@@ -1,19 +1,19 @@
 # This Script Searches through your "Got Your Back (GYB)" Gmail Backups
 # to generate a list of email addresses/names that match a certain criteria.
-# This list is returns as a CSV File within this folder titled "list.csv".
+# This list is returned as a CSV File within this folder titled "list.csv".
 # This script is designed to run in Windows with Python 2.7x 32-bit.
 
 # GYB Can be found here: https://code.google.com/p/got-your-back/
-# The "Validate Email" Python Library is Used: https://github.com/SyrusAkbary/validate_email
+# The "Validate Email" Python Library is optionally Used: https://github.com/SyrusAkbary/validate_email
 
-# This Script has been written by Jeremy Blum (www.jeremyblum.com).  Licensed via GPL v3.
+# This Script was written by Jeremy Blum (www.jeremyblum.com).  Licensed via GPL v3.
 
 ######
 # CONFIGURATION OPTIONS
 ######
 gyb_abs_directory       = 'C:\\gyb\\jeremy@jeremyblum.com\\'
 start_year              = 2006
-end_year                = 2011
+end_year                = 2013
 contact_search_term     = 'Subject: JeremyBlum.com Contact'
 comment_search_term     = 'Subject: [JeremyBlum.com] Comment'
 spam_term               = 'Akismet: Spam'
